@@ -1,0 +1,47 @@
+#
+# define display information
+#
+name: Whole Genome Alignment with Mugsy
+tooltip: |
+        Perform whole genome alignment on multiple genomes with Mugsy
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar methods that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            []
+        next:
+            []
+    methods:
+        related:
+            []
+        next:
+            []
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    input_genomes :
+        ui-name : |
+            Genomes
+        short-hint : |
+            A list of references to genomes stored in KBase
+        long-hint  : |
+            A list of references to genomes stored in KBase
+
+    minlength:
+        ui-name : '--minlength'
+        short-hint : 'minimum span of an aligned region in a colinear block (bp), default 300'
+
+    distance:
+        ui-name : '--distance'
+        short-hint : 'maximum distance along a single sequence (bp) for chaining anchors into locally colinear blocks (LCBs), default 1000'
+
+description : |
+	<p>This is a KBase wrapper for whole genome aligners.</p>
