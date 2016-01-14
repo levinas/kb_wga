@@ -20,7 +20,7 @@ module WholeGenomeAlignment {
     */
     typedef structure {
         string workspace_name;
-        list<stirng> input_genome_names;
+        list<string> input_genome_names;
 
         int minlength;
         int distance;
