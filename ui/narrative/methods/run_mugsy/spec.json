@@ -12,6 +12,17 @@
     },
     "parameters": [
         {
+            "id": "input_genomeset",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ "KBaseSearch.GenomeSet" ]
+            }
+        },
+        {
             "id": "input_genomes",
             "optional": true,
             "advanced": false,
@@ -19,14 +30,14 @@
             "default_values": [ "" ],
             "field_type": "text",
             "text_options": {
-                "valid_ws_types": [ "KBaseGenomes.Genome" ],
+                "valid_ws_types": [ "KBaseGenomes.Genome", "KBaseGenomes.ContigSet" ],
                 "is_output_name":true
             }
         },
         {
             "id": "minlength",
-            "optional": false,
-            "advanced": false,
+            "optional": true,
+            "advanced": true,
             "allow_multiple": false,
             "default_values": [ "" ],
             "field_type": "text",
@@ -37,8 +48,8 @@
         },
         {
             "id": "distance",
-            "optional": false,
-            "advanced": false,
+            "optional": true,
+            "advanced": true,
             "allow_multiple": false,
             "default_values": [ "" ],
             "field_type": "text",
@@ -57,6 +68,11 @@
                 {
                     "narrative_system_variable": "workspace",
                     "target_property": "workspace"
+                },
+		{
+                    "input_parameter": "input_genomeset",
+                    "target_property": "input_genomeset_ref",
+                    "target_type_transform": "ref"
                 },
                 {
                     "input_parameter": "input_genomes",

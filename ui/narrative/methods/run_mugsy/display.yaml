@@ -27,6 +27,14 @@ suggestions:
 # Configure the display and description of parameters
 #
 parameters :
+    input_genomeset :
+        ui-name : |
+            Genome Set
+        short-hint : |
+            A set of references to genomes stored in KBase
+        long-hint  : |
+            A set of references to genomes stored in KBase
+
     input_genomes :
         ui-name : |
             Genome
