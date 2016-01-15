@@ -180,8 +180,8 @@ class WholeGenomeAlignment:
         with open(maf_file, 'r') as f:
             for line in f:
                 line = line.replace('\n', '')
-                if len(line) > 50:
-                    report += line[:50]+"...\n"
+                if len(line) > 80:
+                    report += line[:80]+"...\n"
                 else:
                     report += line+"\n"
 
