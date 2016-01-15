@@ -91,6 +91,10 @@
                     "target_property": "input_genome_refs",
                     "target_type_transform": "list<ref>"
                 },
+		{
+		    "input_parameter": "output_alignment_name",
+          	    "target_property": "output_alignment_name"
+		},
                 {
                     "input_parameter": "minlength",
                     "target_property": "minlength"

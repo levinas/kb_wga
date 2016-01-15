@@ -182,7 +182,7 @@ class WholeGenomeAlignment:
 
         print(report)
 
-        aln_fata = os.path.join(output_dir, 'aln.fasta')
+        aln_fasta = os.path.join(output_dir, 'aln.fasta')
         cmdstr = 'maf2fasta.pl < {} > {}'.format(maf_file, aln_fasta)
         logger.debug('CMD: {}'.format(cmdstr))
         subprocess.check_call(cmdstr, shell=True)
@@ -231,6 +231,16 @@ class WholeGenomeAlignment:
 
         provenance[0]["input_ws_objects"] = input_ws_objects
         provenance[0]["description"] = "whole genome alignment using mugsy"
+
+
+        # save the alignment object
+        aln_obj_info = ws.save_objects({
+            'id': wsid, # set the output workspace ID
+            'objects':[{'type': 'KBaseGenomes.ContigSet',
+                        'data': contigset_data,
+                        'name': params['output_alignment_name'],
+                        'meta': {},
+                        'provenance': provenance}]})
 
 
         reportObj = {

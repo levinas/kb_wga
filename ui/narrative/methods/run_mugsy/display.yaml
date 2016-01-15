@@ -44,7 +44,7 @@ parameters :
             A list of references to genomes or contigsets stored in KBase
 
     output_alignment_name:
-        ui-name : Output whole genome alignment name
+        ui-name : Output Alignment
         short-hint : Enter a name for the output whole genome alignment data object
 
     minlength:
@@ -57,3 +57,10 @@ parameters :
 
 description : |
 	<p>This is a KBase wrapper for whole genome aligners.</p>
+
+publications :
+    -
+        pmid: 21148543
+        display-text : |
+            'Angiuoli, S. V., & Salzberg, S. L. (2011). Mugsy: fast multiple alignment of closely related whole genomes. Bioinformatics, 27(3), 334-342'
+        link: http://www.ncbi.nlm.nih.gov/pubmed/21148543
