@@ -25,6 +25,7 @@ module WholeGenomeAlignment {
         string workspace_name;
         string input_genomeset;
         list<string> input_genome_names;
+		string output_alignment_name;
 
         int minlength;
         int distance;

@@ -168,11 +168,11 @@ class WholeGenomeAlignment:
         if p.returncode != 0:
             raise ValueError('Error running mugsy, return code: {}\n\n{}'.format(p.returncode, '\n'.join(console)))
 
+
         report = 'Genomes/ContigSets aligned with Mugsy:\n'
         for pos, ref in enumerate(genome_refs):
             name = ref.split('/')[1]
             report += '  {}: {}\n'.format(pos+1, name)
-
 
         report += '\n\n============= MAF output =============\n\n'
         maf_file = os.path.join(output_dir, 'out.maf')
@@ -181,6 +181,35 @@ class WholeGenomeAlignment:
             report += maf
 
         print(report)
+
+        aln_fata = os.path.join(output_dir, 'aln.fasta')
+        cmdstr = 'maf2fasta.pl < {} > {}'.format(maf_file, aln_fasta)
+        logger.debug('CMD: {}'.format(cmdstr))
+        subprocess.check_call(cmdstr, shell=True)
+
+        # Warning: this reads everything into memory!  Will not work if
+        # the contigset is very large!
+        contigset_data = {
+            'id': 'mugsy.aln',
+            'source': 'User assembled contigs from reads in KBase',
+            'source_id':'none',
+            'md5': 'md5 of what? concat seq? concat md5s?',
+            'contigs':[]
+        }
+
+        lengths = []
+        for seq_record in SeqIO.parse(aln_fasta, 'fasta'):
+            contig = {
+                'id': seq_record.id,
+                'name': seq_record.name,
+                'description': seq_record.description,
+                'length': len(seq_record.seq),
+                'sequence': str(seq_record.seq),
+                'md5': hashlib.md5(str(seq_record.seq)).hexdigest()
+            }
+            lengths.append(contig['length'])
+            contigset_data['contigs'].append(contig)
+
 
         # provenance
         input_ws_objects = []
@@ -221,7 +250,7 @@ class WholeGenomeAlignment:
                     'data': reportObj,
                     'name': reportName,
                     'meta': {},
-                    'hidden': 0,
+                    'hidden': 1,
                     'provenance': provenance
                 }
             ]})[0]

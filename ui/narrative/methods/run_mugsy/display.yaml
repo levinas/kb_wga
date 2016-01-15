@@ -43,6 +43,10 @@ parameters :
         long-hint  : |
             A list of references to genomes or contigsets stored in KBase
 
+    output_alignment_name:
+        ui-name : Output whole genome alignment name
+        short-hint : Enter a name for the output whole genome alignment data object
+
     minlength:
         ui-name : '--minlength'
         short-hint : 'minimum span of an aligned region in a colinear block (bp), default 300'

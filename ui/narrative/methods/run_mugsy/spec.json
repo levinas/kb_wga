@@ -34,6 +34,18 @@
                 "is_output_name":true
             }
         },
+	{
+	    "id" : "output_alignment_name",
+	    "optional" : false,
+	    "advanced" : false,
+	    "allow_multiple" : false,
+	    "default_values" : [ "mugsy.alignment" ],
+	    "field_type" : "text",
+	    "text_options" : {
+		"valid_ws_types" : [ "KBaseGenomes.ContigSet" ],
+		"is_output_name":true
+	    }
+	},
         {
             "id": "minlength",
             "optional": true,
