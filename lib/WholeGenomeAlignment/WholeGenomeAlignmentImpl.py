@@ -7,6 +7,7 @@ import logging
 import subprocess
 import tempfile
 import uuid
+import hashlib
 
 from datetime import datetime
 
@@ -246,7 +247,8 @@ class WholeGenomeAlignment:
         reportObj = {
             # FIXME: change ref to FASTA alignment
             # 'objects_created':[{'ref':params['workspace_name']+'/'+params['output_contigset_name'], 'description':'Assembled contigs'}],
-            'objects_created':[{'ref':input_ws_objects[0], 'description':'Mugsy report'}],
+            # 'objects_created':[{'ref':input_ws_objects[0], 'description':'Mugsy report'}],
+            'objects_created':[{'ref':params['workspace_name']+'/'+params['output_alignment_name'], 'description':'Assembled contigs'}],
             'text_message': report
         }
 
