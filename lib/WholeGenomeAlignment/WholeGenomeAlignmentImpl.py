@@ -84,11 +84,14 @@ class WholeGenomeAlignment:
 
         token = ctx["token"]
         ws = workspaceService(self.workspaceURL, token=token)
+        wsid = None
 
         genomeset = None
         if "input_genomeset_ref" in params and params["input_genomeset_ref"] is not None:
             logger.info("Loading GenomeSet object from workspace")
-            genomeset = ws.get_objects([{"ref": params["input_genomeset_ref"]}])[0]["data"]
+            objects = ws.get_objects([{"ref": params["input_genomeset_ref"]}])
+            genomes = objects[0]["data"]
+            wsid = objects[0]['info'][6]
 
         genome_refs = []
         if genomeset is not None:
@@ -119,6 +122,7 @@ class WholeGenomeAlignment:
             obj = ws.get_objects([{"ref": ref}])[0]
             data = obj["data"]
             info = obj["info"]
+            wsid = wsid or info[6]
             type_name = info[2].split('.')[1].split('-')[0]
             logger.info("type_name = {}".format(type_name))
 
@@ -166,7 +170,8 @@ class WholeGenomeAlignment:
 
         report = 'Genomes/ContigSets aligned with Mugsy:\n'
         for pos, ref in enumerate(genome_refs):
-            report += '  {}: {}\n'.format(pos+1, ref)
+            name = ref.split('/')[1]
+            report += '  {}: {}\n'.format(pos+1, name)
 
 
         report += '\n\n============= MAF output =============\n\n'
@@ -174,6 +179,8 @@ class WholeGenomeAlignment:
         with open(maf_file, 'r') as f:
             maf = f.read()
             report += maf
+
+        print(report)
 
         # provenance
         input_ws_objects = []
@@ -196,7 +203,7 @@ class WholeGenomeAlignment:
         provenance[0]["input_ws_objects"] = input_ws_objects
         provenance[0]["description"] = "whole genome alignment using mugsy"
 
-        # report
+
         reportObj = {
             # FIXME: change ref to FASTA alignment
             # 'objects_created':[{'ref':params['workspace_name']+'/'+params['output_contigset_name'], 'description':'Assembled contigs'}],
@@ -206,17 +213,18 @@ class WholeGenomeAlignment:
 
         reportName = '{}.report.{}'.format('run_mugsy', hex(uuid.getnode()))
         report_obj_info = ws.save_objects({
-                'workspace': params["workspace_name"],
-                'objects': [
-                    {
-                        'type': 'KBaseReport.Report',
-                        'data': reportObj,
-                        'name': reportName,
-                        'meta': {},
-                        'hidden': 0,
-                        'provenance': provenance
-                    }
-                ]})[0]
+                # 'workspace': params["workspace_name"],
+            'id': wsid,
+            'objects': [
+                {
+                    'type': 'KBaseReport.Report',
+                    'data': reportObj,
+                    'name': reportName,
+                    'meta': {},
+                    'hidden': 0,
+                    'provenance': provenance
+                }
+            ]})[0]
 
 
         # shutil.rmtree(output_dir)
