@@ -29,7 +29,7 @@ suggestions:
 parameters :
     input_genomes :
         ui-name : |
-            Genomes
+            Genome
         short-hint : |
             A list of references to genomes stored in KBase
         long-hint  : |
