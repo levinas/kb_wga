@@ -116,6 +116,7 @@ class WholeGenomeAlignment:
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
+        genome_names = []
         fasta_files = []
         for pos, ref in enumerate(genome_refs):
             logger.info("Loading Genome object from workspace for ref: ".format(ref))
@@ -129,11 +130,16 @@ class WholeGenomeAlignment:
 
             # if KBaseGenomes.ContigSet
             if type_name == 'Genome':
+                # logger.debug("genome = {}".format(json.dumps(data)))
+                genome_names.append(data.get("scientific_name", "") + " ({})".format(ref))
                 contigset_ref = data["contigset_ref"]
                 obj = ws.get_objects([{"ref": contigset_ref}])[0]
                 data = obj["data"]
                 info = obj["info"]
-                # logger.info("data = {}".format(json.dumps(data)))
+                # logger.debug("data = {}".format(json.dumps(data)))
+            else:
+                genome_names.append(ref.split('/')[1] + " ({})".format(ref.split('/')[0]))
+
 
             fasta_name = os.path.join(output_dir, "{}.fa".format(pos+1))
             self.contigset_to_fasta(data, fasta_name)
@@ -171,8 +177,7 @@ class WholeGenomeAlignment:
 
 
         report = 'Genomes/ContigSets aligned with Mugsy:\n'
-        for pos, ref in enumerate(genome_refs):
-            name = ref.split('/')[1]
+        for pos, name in enumerate(genome_names):
             report += '  {}: {}\n'.format(pos+1, name)
 
         report += '\n\n============= MAF output =============\n\n'
