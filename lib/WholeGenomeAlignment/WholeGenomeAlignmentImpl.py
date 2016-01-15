@@ -91,7 +91,7 @@ class WholeGenomeAlignment:
         if "input_genomeset_ref" in params and params["input_genomeset_ref"] is not None:
             logger.info("Loading GenomeSet object from workspace")
             objects = ws.get_objects([{"ref": params["input_genomeset_ref"]}])
-            genomes = objects[0]["data"]
+            genomeset = objects[0]["data"]
             wsid = objects[0]['info'][6]
 
         genome_refs = []
@@ -185,7 +185,7 @@ class WholeGenomeAlignment:
                 else:
                     report += line+"\n"
 
-        # print(report)
+        print(report)
 
         aln_fasta = os.path.join(output_dir, 'aln.fasta')
         cmdstr = 'maf2fasta.pl < {} | sed "s/=//g" > {}'.format(maf_file, aln_fasta)
