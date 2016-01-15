@@ -181,7 +181,7 @@ class WholeGenomeAlignment:
             maf = f.read()
             report += maf
 
-        print(report)
+        # print(report)
 
         aln_fasta = os.path.join(output_dir, 'aln.fasta')
         cmdstr = 'maf2fasta.pl < {} > {}'.format(maf_file, aln_fasta)
