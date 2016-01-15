@@ -207,7 +207,7 @@ class WholeGenomeAlignment:
 
         reportName = '{}.report.{}'.format('run_mugsy', hex(uuid.getnode()))
         report_obj_info = ws.save_objects({
-                'workspace': params["workspace"],
+                'workspace': params["workspace_name"],
                 'objects': [
                     {
                         'type': 'KBaseReport.Report',
