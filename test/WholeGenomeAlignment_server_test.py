@@ -68,8 +68,8 @@ class WholeGenomeAlignmentTest(unittest.TestCase):
 
     def test_run_mugsy(self):
         params = self.getGenomeSetInfo()
-        if not 'output_contigset_name' in params:
-            params['output.contigset'] = 'output.alignment'
+        if not 'output_alignment_name' in params:
+            params['output_alignment_name'] = 'output.alignment'
 
         logger.info(json.dumps(params))
 
