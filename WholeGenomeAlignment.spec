@@ -4,13 +4,13 @@ A KBase module: WholeGenomeAlignment
 
 module WholeGenomeAlignment {
 
-	/*
-		Run Mugsy.
+    /*
+        Run Mugsy.
 
-		workspace_name - the name of the workspace for input/output
+        workspace_name - the name of the workspace for input/output
         input_genomeset_ref - optional input reference to genome set
         input_genome_refs - optional input list of references to genome objects
-  		output_alignment_name - the name of the output alignment
+        output_alignment_name - the name of the output alignment
 
         minlength - minimum span of an aligned region in a colinear block (bp), default 30
         distance - maximum distance along a single sequence (bp) for chaining
@@ -25,16 +25,16 @@ module WholeGenomeAlignment {
         string workspace_name;
         string input_genomeset;
         list<string> input_genome_names;
-		string output_alignment_name;
+        string output_alignment_name;
 
         int minlength;
         int distance;
     } MugsyParams;
 
-	typedef structure {
-		string report_name;
+    typedef structure {
+        string report_name;
         string report_ref;
-	} WGAOutput;
+    } WGAOutput;
 
     funcdef run_mugsy(MugsyParams params) returns (WGAOutput output)
         authentication required;
