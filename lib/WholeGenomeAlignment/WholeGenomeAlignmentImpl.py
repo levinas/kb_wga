@@ -194,7 +194,6 @@ class WholeGenomeAlignment:
                            "method_params": [params]}]
 
         provenance[0]["input_ws_objects"] = input_ws_objects
-        provenance[0]["service_ver"] = "0.0.1"
         provenance[0]["description"] = "whole genome alignment using mugsy"
 
         # report
