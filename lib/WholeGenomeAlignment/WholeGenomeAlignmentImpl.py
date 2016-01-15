@@ -213,7 +213,7 @@ class WholeGenomeAlignment:
                         'data': reportObj,
                         'name': reportName,
                         'meta': {},
-                        'hidden': 1,
+                        'hidden': 0,
                         'provenance': provenance
                     }
                 ]})[0]
