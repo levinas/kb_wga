@@ -177,11 +177,16 @@ class WholeGenomeAlignment:
 
         report += '\n\n============= MAF output =============\n\n'
         maf_file = os.path.join(output_dir, 'out.maf')
+        maf = ""
         with open(maf_file, 'r') as f:
-            maf = f.read()
-            report += maf
+            for line in f:
+                maf += line + "\n"
+                if len(line) > 50:
+                    report += line[:50]+"...\n"
+                else:
+                    report += line+"\n"
 
-        # print(report)
+        print(report)
 
         aln_fasta = os.path.join(output_dir, 'aln.fasta')
         cmdstr = 'maf2fasta.pl < {} > {}'.format(maf_file, aln_fasta)
@@ -245,9 +250,6 @@ class WholeGenomeAlignment:
 
 
         reportObj = {
-            # FIXME: change ref to FASTA alignment
-            # 'objects_created':[{'ref':params['workspace_name']+'/'+params['output_contigset_name'], 'description':'Assembled contigs'}],
-            # 'objects_created':[{'ref':input_ws_objects[0], 'description':'Mugsy report'}],
             'objects_created':[{'ref':params['workspace_name']+'/'+params['output_alignment_name'], 'description':'Mugsy whole genome alignment'}],
             'text_message': report
         }
