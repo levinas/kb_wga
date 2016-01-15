@@ -177,16 +177,15 @@ class WholeGenomeAlignment:
 
         report += '\n\n============= MAF output =============\n\n'
         maf_file = os.path.join(output_dir, 'out.maf')
-        maf = ""
         with open(maf_file, 'r') as f:
             for line in f:
-                maf += line + "\n"
+                line = line.replace('\n', '')
                 if len(line) > 50:
                     report += line[:50]+"...\n"
                 else:
                     report += line+"\n"
 
-        print(report)
+        # print(report)
 
         aln_fasta = os.path.join(output_dir, 'aln.fasta')
         cmdstr = 'maf2fasta.pl < {} > {}'.format(maf_file, aln_fasta)
