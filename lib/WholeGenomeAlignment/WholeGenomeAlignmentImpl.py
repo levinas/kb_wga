@@ -188,7 +188,7 @@ class WholeGenomeAlignment:
         # print(report)
 
         aln_fasta = os.path.join(output_dir, 'aln.fasta')
-        cmdstr = 'maf2fasta.pl < {} > {}'.format(maf_file, aln_fasta)
+        cmdstr = 'maf2fasta.pl < {} | sed "s/=//g" > {}'.format(maf_file, aln_fasta)
         logger.debug('CMD: {}'.format(cmdstr))
         subprocess.check_call(cmdstr, shell=True)
 
