@@ -37,11 +37,11 @@ parameters :
 
     input_genomes :
         ui-name : |
-            Genome
+            Genome or ContigSet
         short-hint : |
-            A list of references to genomes stored in KBase
+            A list of references to genomes or contigsets stored in KBase
         long-hint  : |
-            A list of references to genomes stored in KBase
+            A list of references to genomes or contigsets stored in KBase
 
     minlength:
         ui-name : '--minlength'
