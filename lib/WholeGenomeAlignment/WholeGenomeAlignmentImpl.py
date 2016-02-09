@@ -246,7 +246,7 @@ class WholeGenomeAlignment:
         # save the alignment object
         aln_obj_info = ws.save_objects({
             'id': wsid, # set the output workspace ID
-            'objects':[{'type': 'KBaseGenomes.ContigSet',
+            'objects':[{'type': 'ComparativeGenomics.WholeGenomeAlignment',
                         'data': contigset_data,
                         'name': params['output_alignment_name'],
                         'meta': {},
