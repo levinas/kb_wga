@@ -36,6 +36,11 @@ module WholeGenomeAlignment {
         string report_ref;
     } WGAOutput;
 
+    typedef MugsyParams MauveParams;
+
     funcdef run_mugsy(MugsyParams params) returns (WGAOutput output)
+        authentication required;
+
+    funcdef run_mauve(MauveParams params) returns (WGAOutput output)
         authentication required;
 };
