@@ -56,7 +56,7 @@ parameters :
         short-hint : 'maximum distance along a single sequence (bp) for chaining anchors into locally colinear blocks (LCBs), default 1000'
 
 description : |
-	<p>This is a KBase wrapper for whole genome aligners.</p>
+	<p>This is a KBase wrapper for the whole genome aligner Mugsy.</p>
 
 publications :
     -

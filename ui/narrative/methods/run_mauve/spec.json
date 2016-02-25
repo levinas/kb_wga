@@ -1,5 +1,5 @@
 {
-    "ver": "0.0.3",
+    "ver": "0.0.5",
     "authors": [
         "fangfang"
     ],
@@ -47,27 +47,36 @@
 	    }
 	},
         {
-            "id": "minlength",
+            "id": "max_breakpoint_distance_scale",
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
             "default_values": [ "" ],
             "field_type": "text",
             "text_options": {
-                "validate_as": "int",
-                "min_integer" : 1
+                "validate_as": "float"
             }
         },
         {
-            "id": "distance",
+            "id": "conservation_distance_scale",
             "optional": true,
             "advanced": true,
             "allow_multiple": false,
             "default_values": [ "" ],
             "field_type": "text",
             "text_options": {
-                "validate_as": "int",
-                "min_integer" : 1
+                "validate_as": "float"
+            }
+        },
+        {
+            "id": "hmm_identity",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "float"
             }
         }
     ],
@@ -96,12 +105,16 @@
           	    "target_property": "output_alignment_name"
 		},
                 {
-                    "input_parameter": "minlength",
-                    "target_property": "minlength"
+                    "input_parameter": "max_breakpoint_distance_scale",
+                    "target_property": "max_breakpoint_distance_scale"
                 },
                 {
-                    "input_parameter": "distance",
-                    "target_property": "distance"
+                    "input_parameter": "conservation_distance_scale",
+                    "target_property": "conservation_distance_scale"
+                },
+                {
+                    "input_parameter": "hmm_identity",
+                    "target_property": "hmm_identity"
                 }
             ],
             "output_mapping": [

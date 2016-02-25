@@ -48,7 +48,9 @@ class WholeGenomeAlignment:
         # we should do something better here...
         if target is not None:
             target.append(message)
-        logger.info(message)
+        print(message)
+        sys.stdout.flush()
+        # logger.debug(message)
 
     def contigset_to_fasta(self, contigset, fasta_file):
         records = []
@@ -81,7 +83,7 @@ class WholeGenomeAlignment:
         # return variables are: output
         #BEGIN run_mugsy
 
-        logger.info("params={}".format(json.dumps(params)))
+        logger.info("Running Mugsy with params = {}".format(json.dumps(params)))
 
         token = ctx["token"]
         ws = workspaceService(self.workspaceURL, token=token)
@@ -155,6 +157,16 @@ class WholeGenomeAlignment:
         logger.info("Run Mugsy:")
 
         cmd = ['mugsy', '-p', 'out', '--directory', output_dir ]
+
+        if 'minlength' in params:
+            if params['minlength']:
+                cmd.append('--minlength')
+                cmd.append(str(params['minlength']))
+        if 'distance' in params:
+            if params['distance']:
+                cmd.append('--distance')
+                cmd.append(str(params['distance']))
+
         cmd += fasta_files
 
         logger.info("CMD: {}".format(' '.join(cmd)))
@@ -294,7 +306,7 @@ class WholeGenomeAlignment:
         # return variables are: output
         #BEGIN run_mauve
 
-        logger.info("params={}".format(json.dumps(params)))
+        logger.info("Running progressiveMauve with params = {}".format(json.dumps(params)))
 
         token = ctx["token"]
         ws = workspaceService(self.workspaceURL, token=token)
@@ -365,9 +377,25 @@ class WholeGenomeAlignment:
 
         logger.info("fasta_files = {}".format(fasta_files))
 
-        logger.info("Run Mauve:")
+        logger.info("Run progressiveMauve:")
 
-        cmd = ['mugsy', '-p', 'out', '--directory', output_dir ]
+        xmfa_file = os.path.join(output_dir, 'out.xmfa')
+
+        cmd = ['progressiveMauve', '--output={}'.format(xmfa_file)]
+
+        if 'max_breakpoint_distance_scale' in params:
+            if params['max_breakpoint_distance_scale']:
+                cmd.append('--max-breakpoint-distance-scale')
+                cmd.append(str(params['max_breakpoint_distance_scale']))
+        if 'conservation_distance_scale' in params:
+            if params['conservation_distance_scale']:
+                cmd.append('--conservation-distance-scale')
+                cmd.append(str(params['conservation_distance_scale']))
+        if 'hmm_identity' in params:
+            if params['hmm_identity']:
+                cmd.append('--hmm-identity')
+                cmd.append(str(params['hmm_identity']))
+
         cmd += fasta_files
 
         logger.info("CMD: {}".format(' '.join(cmd)))
@@ -386,16 +414,16 @@ class WholeGenomeAlignment:
         p.wait()
         logger.debug('return code: {}'.format(p.returncode))
         if p.returncode != 0:
-            raise ValueError('Error running mauve, return code: {}\n\n{}'.format(p.returncode, '\n'.join(console)))
+            raise ValueError('Error running progressiveMauve, return code: {}\n\n{}'.format(p.returncode, '\n'.join(console)))
 
 
         report = 'Genomes/ContigSets aligned with Mauve:\n'
         for pos, name in enumerate(genome_names):
             report += '  {}: {}\n'.format(pos+1, name)
 
-        report += '\n\n============= MAF output =============\n\n'
-        maf_file = os.path.join(output_dir, 'out.maf')
-        with open(maf_file, 'r') as f:
+        report += '\n\n============= XMFA.backbone output =============\n\n'
+        backbone_file =  os.path.join(output_dir, 'out.xmfa.backbone')
+        with open(backbone_file, 'r') as f:
             for line in f:
                 line = line.replace('\n', '')
                 if len(line) > 80:
@@ -406,7 +434,7 @@ class WholeGenomeAlignment:
         print(report)
 
         aln_fasta = os.path.join(output_dir, 'aln.fasta')
-        cmdstr = 'maf2fasta.pl < {} | sed "s/=//g" > {}'.format(maf_file, aln_fasta)
+        cmdstr = 'cat {} | sed "s/^#.*//g; s/=//g" > {}'.format(xmfa_file, aln_fasta)
         logger.debug('CMD: {}'.format(cmdstr))
         subprocess.check_call(cmdstr, shell=True)
 

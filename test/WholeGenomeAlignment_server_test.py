@@ -75,3 +75,13 @@ class WholeGenomeAlignmentTest(unittest.TestCase):
 
         result = self.getImpl().run_mugsy(self.getContext(),params)
         logger.info(result)
+
+    def test_run_mauve(self):
+        params = self.getGenomeSetInfo()
+        if not params.get('output_alignment_name'):
+            params['output_alignment_name'] = 'output.alignment'
+
+        logger.info(json.dumps(params))
+
+        result = self.getImpl().run_mauve(self.getContext(),params)
+        logger.info(result)

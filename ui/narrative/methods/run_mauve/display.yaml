@@ -1,9 +1,9 @@
 #
 # define display information
 #
-name: Whole Genome Alignment with Mauve
+name: Whole Genome Alignment with progressiveMauve
 tooltip: |
-        Perform whole genome alignment on multiple genomes with Mauve
+        Perform whole genome alignment on multiple genomes with progressiveMauve
 screenshots: []
 
 icon: icon.png
@@ -47,20 +47,24 @@ parameters :
         ui-name : Output Alignment
         short-hint : Enter a name for the output whole genome alignment data object
 
-    minlength:
-        ui-name : '--minlength'
-        short-hint : 'minimum span of an aligned region in a colinear block (bp), default 300'
+    max_breakpoint_distance_scale:
+        ui-name : '--max-breakpoint-distance-scale'
+        short-hint : 'set the maximum weight scaling by breakpoint distance [0,1]; defaults to 0.5'
 
-    distance:
-        ui-name : '--distance'
-        short-hint : 'maximum distance along a single sequence (bp) for chaining anchors into locally colinear blocks (LCBs), default 1000'
+    conservation_distance_scale:
+        ui-name : '--conservation-distance-scale'
+        short-hint : 'scale conservation distances by this amount [0,1]; defaults to 0.5'
+
+    hmm_identity:
+        ui-name : '--hmm-identity'
+        short-hint : 'expected level of sequence identity among pairs of sequences [0,1]; defaults to 0.7'
 
 description : |
-	<p>This is a KBase wrapper for whole genome aligners.</p>
+	<p>This is a KBase wrapper for the whole genome aligner progressiveMauve.</p>
 
 publications :
     -
-        pmid: 21148543
+        pmid: 20593022
         display-text : |
-            'Angiuoli, S. V., & Salzberg, S. L. (2011). Mugsy: fast multiple alignment of closely related whole genomes. Bioinformatics, 27(3), 334-342'
-        link: http://www.ncbi.nlm.nih.gov/pubmed/21148543
+	    'Darling, A. E., Mau, B., & Perna, N. T. (2010). progressiveMauve: multiple genome alignment with gene gain, loss and rearrangement. PloS one, 5(6), e11147'
+        link: http://www.ncbi.nlm.nih.gov/pubmed/20593022
