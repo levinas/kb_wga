@@ -19,7 +19,7 @@ from biokbase.workspace.client import Workspace as workspaceService
 
 
 logging.basicConfig(format="[%(asctime)s %(levelname)s %(name)s] %(message)s",
-                    level=logging.DEBUG)
+                    level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 #END_HEADER
