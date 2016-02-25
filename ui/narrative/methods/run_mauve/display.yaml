@@ -1,7 +1,7 @@
 #
 # define display information
 #
-name: Whole Genome Alignment with progressiveMauve
+name: Align Whole Genomes with progressiveMauve
 tooltip: |
         Perform whole genome alignment on multiple genomes with progressiveMauve
 screenshots: []
@@ -61,6 +61,7 @@ parameters :
 
 description : |
 	<p>This is a KBase wrapper for the whole genome aligner progressiveMauve.</p>
+	<p>This method performs the whole genome alignment of the DNA sequences of multiple Genomes or ContigSets. The resulting WholeGenomeAlignment object contains the alignment sequence segments.</p>
 
 publications :
     -

@@ -1,7 +1,7 @@
 #
 # define display information
 #
-name: Whole Genome Alignment with Mugsy
+name: Align Whole Genomes with Mugsy
 tooltip: |
         Perform whole genome alignment on multiple genomes with Mugsy
 screenshots: []
@@ -57,6 +57,7 @@ parameters :
 
 description : |
 	<p>This is a KBase wrapper for the whole genome aligner Mugsy.</p>
+	<p>This method performs the whole genome alignment of the DNA sequences of multiple Genomes or ContigSets. The resulting WholeGenomeAlignment object contains the alignment sequence segments.</p>
 
 publications :
     -
