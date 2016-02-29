@@ -6,7 +6,7 @@ tooltip: |
         Perform whole genome alignment on multiple genomes with progressiveMauve
 screenshots: []
 
-icon: icon.png
+icon: mauve-cyan.png
 
 #
 # define a set of similar methods that might be useful to the user
