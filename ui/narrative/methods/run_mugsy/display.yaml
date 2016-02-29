@@ -6,7 +6,7 @@ tooltip: |
         Perform whole genome alignment on multiple genomes with Mugsy
 screenshots: []
 
-icon: icon.png
+icon: mugsy-cyan.png
 
 #
 # define a set of similar methods that might be useful to the user
