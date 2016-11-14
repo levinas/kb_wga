@@ -1,5 +1,5 @@
 {
-    "ver": "0.0.5",
+    "ver": "0.0.6",
     "authors": [
         "fangfang"
     ],
@@ -30,8 +30,7 @@
             "default_values": [ "" ],
             "field_type": "text",
             "text_options": {
-                "valid_ws_types": [ "KBaseGenomes.Genome", "KBaseGenomes.ContigSet" ],
-                "is_output_name":true
+                "valid_ws_types": [ "KBaseGenomes.Genome", "KBaseGenomes.ContigSet" ]
             }
         },
 	{
@@ -92,12 +91,12 @@
                 },
 		{
                     "input_parameter": "input_genomeset",
-                    "target_property": "input_genomeset_ref",
+                    "target_property": "input_genomeset",
                     "target_type_transform": "ref"
                 },
                 {
                     "input_parameter": "input_genomes",
-                    "target_property": "input_genome_refs",
+                    "target_property": "input_genome_names",
                     "target_type_transform": "list<ref>"
                 },
 		{

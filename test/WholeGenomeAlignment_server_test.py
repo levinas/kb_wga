@@ -60,7 +60,7 @@ class WholeGenomeAlignmentTest(unittest.TestCase):
 
 
     def getGenomeSetInfo(self):
-        testFile = 'data/params.json'
+        testFile = './params.json'
         if os.path.exists(testFile):
             logger.info("Reading input from {}".format(testFile))
             with open(testFile) as testInfoFile:
