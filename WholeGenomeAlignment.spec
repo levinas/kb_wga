@@ -29,6 +29,9 @@ module WholeGenomeAlignment {
 
         int minlength;
         int distance;
+        float max_breakpoint_distance_scale;
+		float conservation_distance_scale;
+		float hmm_identity;
     } MugsyParams;
 
     typedef structure {
