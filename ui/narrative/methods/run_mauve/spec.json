@@ -91,12 +91,12 @@
                 },
 		{
                     "input_parameter": "input_genomeset",
-                    "target_property": "input_genomeset",
+                    "target_property": "input_genomeset_ref",
                     "target_type_transform": "ref"
                 },
                 {
                     "input_parameter": "input_genomes",
-                    "target_property": "input_genome_names",
+                    "target_property": "input_genome_refs",
                     "target_type_transform": "list<ref>"
                 },
 		{
